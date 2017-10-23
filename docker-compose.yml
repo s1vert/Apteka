@@ -1,0 +1,41 @@
+version: '2.0'
+services:
+
+  web:
+    container_name: web
+    image: alexcheng/magento2
+    ports:
+      - "80:80"
+    links:
+      - db
+    env_file:
+      - env
+    volumes:
+      - ./app/vendor/snowdog:/var/www/html/vendor/snowdog
+      - ./app/vendor/composer:/var/www/html/vendor/composer
+      - ./app/etc:/var/www/html/app/etc
+      - ./app/pub:/var/www/html/pub
+  
+  db:
+    container_name: db
+    image: mysql:5.6
+    volumes:
+      - ./dbdata:/var/lib/mysql
+    env_file:
+      - env
+
+
+  adminer:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+    env_file:
+      - env
+    restart: always
+    ports:
+    - 8888:80
+    links:
+      - db
+    volumes:
+      - /sessions 
