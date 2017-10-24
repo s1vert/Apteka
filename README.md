@@ -41,7 +41,7 @@ bash dump_database.sh
 
 ### Import bazy
 ```bash
-bash dump_database.sh
+bash import_database.sh
 ```
 
 
