@@ -1,21 +1,6 @@
 version: '2.0'
 services:
 
-  web:
-    container_name: web
-    image: alexcheng/magento2
-    ports:
-      - "80:80"
-    links:
-      - db
-    env_file:
-      - env
-    volumes:
-      - ./app/vendor/snowdog:/var/www/html/vendor/snowdog
-      - ./app/vendor/composer:/var/www/html/vendor/composer
-      - ./app/etc:/var/www/html/app/etc
-      - ./app/pub:/var/www/html/pub
-  
   db:
     container_name: db
     image: mysql:5.6
@@ -24,7 +9,29 @@ services:
     env_file:
       - env
 
+  web:
+    container_name: web
+    image: alexcheng/magento2:2.1.1
+    #build:
+      #context: .
+      #dockerfile: Dockerfile
+    depends_on:
+      - db
+    ports:
+      - "80:80"
+    links:
+      - db
+    env_file:
+      - env
+    volumes:
+      - ./app/vendor/autoload.php:/var/www/html/vendor/autoload.php
+      - ./app/vendor/snowdog:/var/www/html/vendor/snowdog
+      - ./app/vendor/composer:/var/www/html/vendor/composer
+      - ./app/etc:/var/www/html/app/etc
+      - ./app/pub:/var/www/html/pub
 
+  
+ 
   adminer:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
