@@ -18,9 +18,10 @@ services:
     depends_on:
       - db
     ports:
-      - "80:80"
+      - "8080:80"
     links:
       - db
+      - cache
     env_file:
       - env
     volumes:
@@ -46,3 +47,23 @@ services:
       - db
     volumes:
       - /sessions 
+
+  cache:
+    image: redis
+    container_name: redis
+    ports: 
+    - 6379:80
+
+  varnish:
+    build:
+      context: ./varnish/
+    container_name: varnish
+    ports:
+      - "80:80"
+      - "6082:6082"
+    volumes:
+      - ./varnish/default.vcl:/etc/varnish/default.vcl
+      - ./varnish/varnish:/etc/default/varnish
+      - ./varnish/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
+    links:
+      - web

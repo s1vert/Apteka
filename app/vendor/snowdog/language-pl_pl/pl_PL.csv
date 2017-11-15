@@ -2729,6 +2729,8 @@ Remove,Usuń,module,Magento_Checkout
 "Ship Here","Wysyłamy Tutaj",module,Magento_Checkout
 "Ship To:","Dostawa na adres:",module,Magento_Checkout
 edit,Zmień,module,Magento_Checkout
+"Go to Checkout", "Przejdź do kasy",module,Magento_Checkout
+"View and edit cart", "Zobacz i edytuj koszyk",module,Magento_Checkout
 "Order Summary","Podsumowanie zamówienia",module,Magento_Checkout
 "View and Edit Cart","Zobacz i edytuj koszyk",module,Magento_Checkout
 "View Details","Zobacz szczegóły",module,Magento_Checkout

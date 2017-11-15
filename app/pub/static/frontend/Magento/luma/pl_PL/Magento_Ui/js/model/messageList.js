@@ -1,12 +1,1 @@
-/**
- * Copyright © 2016 Magento. All rights reserved.
- * See COPYING.txt for license details.
- */
-define(
-    [
-        './messages'
-    ], function (Messages) {
-        'use strict';
-        return new Messages();
-    }
-);
+/var/www/html/app/code/Magento/Ui/view/frontend/web/js/model/messageList.js
