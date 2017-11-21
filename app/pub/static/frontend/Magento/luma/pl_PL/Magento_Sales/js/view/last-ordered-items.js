@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Sales/view/frontend/web/js/view/last-ordered-items.js

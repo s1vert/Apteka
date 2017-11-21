@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Ups/view/frontend/web/js/model/shipping-rates-validation-rules.js

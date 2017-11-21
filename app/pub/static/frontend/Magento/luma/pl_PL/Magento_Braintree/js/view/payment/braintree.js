@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Braintree/view/frontend/web/js/view/payment/braintree.js

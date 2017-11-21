@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/CheckoutAgreements/view/frontend/web/js/model/agreements-modal.js

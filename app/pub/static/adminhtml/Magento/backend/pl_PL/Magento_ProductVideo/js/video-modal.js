@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/ProductVideo/view/adminhtml/web/js/video-modal.js

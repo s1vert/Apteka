@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/OfflinePayments/view/frontend/web/js/view/payment/method-renderer/cashondelivery-method.js

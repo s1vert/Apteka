@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Vault/view/frontend/web/js/view/payment/vault.js

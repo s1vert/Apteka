@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Customer/view/frontend/web/change-email-password.js

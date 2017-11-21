@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/ProductVideo/view/adminhtml/web/js/new-video-dialog.js

@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Catalog/view/frontend/web/product/view/validation.js

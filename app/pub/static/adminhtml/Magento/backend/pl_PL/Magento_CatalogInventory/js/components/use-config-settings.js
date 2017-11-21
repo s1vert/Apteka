@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/CatalogInventory/view/adminhtml/web/js/components/use-config-settings.js

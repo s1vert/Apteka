@@ -7,7 +7,7 @@ class MedicineSpider(scrapy.Spider):
     start_urls = ['https://www.aptekagemini.pl/category/bez-recepty/10']
 
     def parse(self, response):
-        # follow links to author pages
+        # follow links to product pages
         for href in response.css('div.name_new a::attr(href)'):
             yield response.follow(href, self.parse_author)
 

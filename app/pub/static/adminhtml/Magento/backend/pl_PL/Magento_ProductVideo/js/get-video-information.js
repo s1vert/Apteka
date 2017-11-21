@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/ProductVideo/view/adminhtml/web/js/get-video-information.js

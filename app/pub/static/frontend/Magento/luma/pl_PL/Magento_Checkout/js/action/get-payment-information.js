@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Checkout/view/frontend/web/js/action/get-payment-information.js

@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Authorizenet/view/frontend/web/js/view/payment/authorizenet.js

@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/Shipping/view/frontend/web/js/view/checkout/shipping/shipping-policy.js

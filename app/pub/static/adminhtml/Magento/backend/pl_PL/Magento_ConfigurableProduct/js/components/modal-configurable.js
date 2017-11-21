@@ -1,0 +1,1 @@
+/var/www/html/app/code/Magento/ConfigurableProduct/view/adminhtml/web/js/components/modal-configurable.js
