@@ -1,0 +1,10 @@
+FROM alexcheng/magento2:2.1.1
+
+COPY ./app/vendor/autoload.php /var/www/html/vendor/autoload.php
+COPY ./app/vendor/snowdog /var/www/html/vendor/snowdog
+COPY ./app/vendor/composer /var/www/html/vendor/composer
+COPY ./app/etc /var/www/html/app/etc
+
+RUN chown -R www-data:www-data /var/www/html/app/etc
+CMD chown -R www-data:www-data /var/www/html/pub/static && /sbin/my_init
+
