@@ -1,6 +1,5 @@
 From ubuntu:14.04
 
-MAINTAINER Alankrit Srivastava alankrit.srivastava256@webkul.com
 
 ##update server
 
@@ -19,6 +18,14 @@ RUN apt-get update \
 && rm /etc/varnish/default.vcl \
 
 && rm /etc/default/varnish 
+
+
+##add varnish configuration file
+
+
+COPY ./default.vcl /etc/varnish/default.vcl
+COPY ./varnish /etc/default/varnish
+COPY ./supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 EXPOSE 6082 80
 

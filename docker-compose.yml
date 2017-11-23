@@ -11,10 +11,9 @@ services:
 
   web:
     container_name: web
-    image: alexcheng/magento2:2.1.1
-    #build:
-      #context: .
-      #dockerfile: Dockerfile
+    build:
+      context: .
+      dockerfile: Magento_Dockerfile
     depends_on:
       - db
     ports:
@@ -25,14 +24,8 @@ services:
     env_file:
       - env
     volumes:
-      - ./app/vendor/autoload.php:/var/www/html/vendor/autoload.php
-      - ./app/vendor/snowdog:/var/www/html/vendor/snowdog
-      - ./app/vendor/composer:/var/www/html/vendor/composer
-      - ./app/etc:/var/www/html/app/etc
       - ./app/pub:/var/www/html/pub
 
-  
- 
   adminer:
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
@@ -45,8 +38,6 @@ services:
     - 8888:80
     links:
       - db
-    volumes:
-      - /sessions 
 
   cache:
     image: redis
@@ -61,9 +52,5 @@ services:
     ports:
       - "80:80"
       - "6082:6082"
-    volumes:
-      - ./varnish/default.vcl:/etc/varnish/default.vcl
-      - ./varnish/varnish:/etc/default/varnish
-      - ./varnish/supervisord.conf:/etc/supervisor/conf.d/supervisord.conf
     links:
       - web
