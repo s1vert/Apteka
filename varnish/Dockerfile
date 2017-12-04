@@ -5,13 +5,12 @@ From ubuntu:14.04
 
 RUN apt-get update \
 
-##install supervisor and setup supervisord.conf file
 
 && apt-get install -y supervisor \
  
 && mkdir -p /var/log/supervisor \
 
-##install varnish
+
 
 && apt-get -y install varnish \
 

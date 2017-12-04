@@ -1,0 +1,12 @@
+<?php
+/**
+ * Google Tag Manager
+ *
+ * Copyright © 2017 MagePal LLC. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /** @var $block \MagePal\GoogleTagManager\Block\DataLayer **/ ?>
+<script type="text/javascript">
+window.<?php echo $block->getDataLayerName() ?> = window.<?php echo $block->getDataLayerName() ?> || [];
+<?php echo $block->getDataLayer(); ?></script>
