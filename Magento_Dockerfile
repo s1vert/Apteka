@@ -6,6 +6,7 @@ COPY ./app/vendor/composer /var/www/html/vendor/composer
 COPY ./app/etc /var/www/html/app/etc
 
 COPY ./app/app/code/MagePal/GoogleTagManager /var/www/html/app/code/MagePal/GoogleTagManager
+COPY ./app/app/code/WeltPixel /var/www/html/app/code/WeltPixel
 
 RUN chown -R www-data:www-data /var/www/html/app/etc
 CMD chown -R www-data:www-data /var/www/html/pub/static && /sbin/my_init
