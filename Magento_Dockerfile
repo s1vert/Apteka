@@ -8,6 +8,16 @@ COPY ./app/etc /var/www/html/app/etc
 COPY ./app/app/code/MagePal/GoogleTagManager /var/www/html/app/code/MagePal/GoogleTagManager
 COPY ./app/app/code/WeltPixel /var/www/html/app/code/WeltPixel
 
+#review controller
+COPY ./app/app/code/Review/Controller /var/www/html/app/code/Magento/Review/Controller
+
+#recommendation widget
+COPY ./app/app/code/CatalogWidget /var/www/html/app/code/Magento/CatalogWidget
+
+
+#widget 2
+COPY ./app/app/code/NewProductWidget/content /var/www/html/app/code/Magento/Catalog/view/frontend/templates/product/widget/new/content
+COPY ./app/app/code/NewProductWidget/NewProduct.php /var/www/html/app/code/Magento/Catalog/Block/Product/NewProduct.php
+
 RUN chown -R www-data:www-data /var/www/html/app/etc
 CMD chown -R www-data:www-data /var/www/html/pub/static && /sbin/my_init
-
