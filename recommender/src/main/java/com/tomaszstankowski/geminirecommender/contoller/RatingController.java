@@ -2,6 +2,7 @@ package com.tomaszstankowski.geminirecommender.contoller;
 
 import com.tomaszstankowski.geminirecommender.model.Rating;
 import com.tomaszstankowski.geminirecommender.service.RatingService;
+import org.apache.mahout.cf.taste.recommender.RecommendedItem;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,5 +28,10 @@ public class RatingController {
     @GetMapping
     public List<Rating> getRatings(){
         return service.findRatings();
+    }
+
+    @GetMapping("/recommendations")
+    public List<RecommendedItem> getRecommendations(long customerId){
+        return service.getRecommendations(customerId);
     }
 }
