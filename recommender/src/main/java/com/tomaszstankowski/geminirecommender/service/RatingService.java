@@ -23,8 +23,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -37,7 +37,9 @@ public class RatingService {
     public RatingService(){
         try{
             createRecommender();
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void createRecommender() throws IOException, IllegalArgumentException, TasteException{
@@ -47,14 +49,13 @@ public class RatingService {
         recommender = new GenericUserBasedRecommender(model, neighborhood, similarity);
     }
 
-    public Rating save(Rating rating){
-        try{
+    public Rating save(Rating rating) throws IOException, TasteException{
             writeToFile(rating);
-            createRecommender();
+            if(recommender == null)
+                createRecommender();
+            else
+                recommender.refresh(null);
             return rating;
-        }catch (Exception e){
-            return null;
-        }
     }
 
     private void writeToFile(Rating rating) throws IOException{
@@ -64,24 +65,25 @@ public class RatingService {
         Files.write(path, line.getBytes(), Files.exists(path) ? StandardOpenOption.APPEND : StandardOpenOption.CREATE);
     }
 
-    public List<Rating> findRatings(){
-        try {
+    public List<Rating> findRatings() throws IOException{
             return Files.readAllLines(Paths.get(dataFilePath)).stream()
                     .map(line -> {
-                        Scanner s = new Scanner(line);
-                        s.useDelimiter(",");
-                        long customerId = s.nextLong();
-                        long productId = s.nextLong();
-                        float rate = s.nextFloat();
-                        return new Rating(customerId, productId, rate);
+                        try {
+                            Scanner s = new Scanner(line);
+                            s.useDelimiter(",");
+                            long customerId = s.nextLong();
+                            long productId = s.nextLong();
+                            float rate = s.nextFloat();
+                            return new Rating(customerId, productId, rate);
+                        }catch (Exception e){
+                            return null;
+                        }
                     })
+                    .filter(Objects::nonNull)
                     .collect(Collectors.toList());
-        }catch (IOException e){ return new ArrayList<>();}
     }
 
-    public List<RecommendedItem> getRecommendations(long customerId){
-        try{
-            return recommender.recommend(customerId, 5);
-        }catch (Exception e){ return new ArrayList<>(); }
+    public List<RecommendedItem> getRecommendations(long customerId) throws TasteException, NullPointerException{
+        return recommender.recommend(customerId, 5);
     }
 }

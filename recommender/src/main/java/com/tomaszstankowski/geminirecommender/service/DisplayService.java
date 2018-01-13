@@ -21,6 +21,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,9 @@ public class DisplayService {
     public DisplayService(){
         try {
             createRecommender();
-        }catch (Exception e){}
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private void createRecommender() throws IOException, IllegalArgumentException{
@@ -41,8 +44,7 @@ public class DisplayService {
         recommender = new GenericItemBasedRecommender(model, itemSimilarity);
     }
 
-    public Display save(Display display){
-        try {
+    public Display save(Display display) throws IOException{
             if (recommender == null) {
                 writeToFile(display);
                 createRecommender();
@@ -55,33 +57,31 @@ public class DisplayService {
                 }
                 if(!exists){
                     writeToFile(display);
-                    createRecommender();
+                    recommender.refresh(null);
                 }
             }
             return display;
-        }catch (Exception e){ return null; }
     }
 
-    public List<Display> findAll(){
-        try {
+    public List<Display> findAll() throws IOException{
             return Files.readAllLines(Paths.get(dataFilePath)).stream()
                     .map(line -> {
-                        Scanner s = new Scanner(line);
-                        s.useDelimiter(",");
-                        long customerId = s.nextLong();
-                        long productId = s.nextLong();
-                        return new Display(customerId, productId);
+                        try {
+                            Scanner s = new Scanner(line);
+                            s.useDelimiter(",");
+                            long customerId = s.nextLong();
+                            long productId = s.nextLong();
+                            return new Display(customerId, productId);
+                        }catch (Exception e){
+                            return null;
+                        }
                     })
+                    .filter(Objects::nonNull)
                     .collect(Collectors.toList());
-        }catch (IOException e){ return new ArrayList<>(); }
     }
 
-    public List<RecommendedItem> getRecommendations(long customerId){
-        try{
-            return recommender.recommend(customerId, 5);
-        }catch (Exception e){
-            return new ArrayList<>();
-        }
+    public List<RecommendedItem> getRecommendations(long customerId) throws TasteException, NullPointerException{
+        return recommender.recommend(customerId, 5);
     }
 
     private void writeToFile(Display display) throws IOException{
